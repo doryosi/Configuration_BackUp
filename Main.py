@@ -51,9 +51,9 @@ def get_configuration(ssh_handler, switch_details):
 
 # save to device configuration to a file named after the device IP address
 def save_to_file(switch_configuration, switch_details):
-    file = "/lib/jenkins/Switch_BackUp/"
+    path = "/lib/jenkins/Switch_BackUp/"
     try:
-        with open(f"{file}{switch_details['ip']}.bak", "w") as back_up_file:
+        with open(f"{path}{switch_details['ip']}.bak", "w") as back_up_file:
             back_up_file.write(switch_configuration)
     except FileNotFoundError as e:
         print(f"file not found {e.args}")
