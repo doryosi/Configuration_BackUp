@@ -49,7 +49,7 @@ def get_configuration(ssh_handler, switch_details):
     elif vendor == "checkpoint_gaia":
         switch_config = ssh_handler.send_command("clish -c \"show configuration\"")
     else:
-        switch_config = ssh_handler.send_command("display current-configuration", read_timeout=15)
+        switch_config = ssh_handler.send_command("display current-configuration", timeout=20)
     return switch_config
 
 
