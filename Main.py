@@ -7,7 +7,8 @@ from netmiko.ssh_exception import AuthenticationException
 
 # read the file "device_file" and create a dictionary
 def get_device_details():
-    with open('devices_details') as f:
+    file_path = "/var/lib/jenkins/workspace/Git_Job/Configuration_BackUp/"
+    with open(file_path) as f:
         content = csv.reader(f)
         dict_from_csv = {rows[0]: rows[1:6] for rows in content}
     return dict_from_csv
