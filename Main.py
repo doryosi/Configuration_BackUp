@@ -55,7 +55,7 @@ def get_configuration(ssh_handler, switch_details):
 
 # save to device configuration to a file named after the device IP address
 def save_to_file(switch_configuration, switch_details):
-    path = "/lib/jenkins/Switch_BackUp/"
+    path = "/var/lib/jenkins/Switch_BackUp/"
     try:
         with open(f"{path}{switch_details['ip']}.bak", "w") as back_up_file:
             back_up_file.write(switch_configuration)
