@@ -10,7 +10,7 @@ node{
         sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
     }
     stage("execute"){
-        sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
+        sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/Main.py"
     }
     stage("Verify"){
         sh "ls -l /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
