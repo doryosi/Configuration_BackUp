@@ -7,7 +7,7 @@ node{
         git "https://github.com/doryosi/Configuration_BackUp.git"
     }
     stage("execute"){
-        sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/
+        sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
     }
     stage("Copy DB"){
         sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
