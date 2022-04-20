@@ -7,9 +7,9 @@ node{
         git "https://github.com/doryosi/Configuration_BackUp.git"
     }
     stage("Copy DB"){
-        sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Git_Job/Configuration_BackUp/"
+        sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Git_Job/Network_Backup_Pipeline/"
     }
     stage("Verify"){
-        sh "ls -l /var/lib/jenkins/workspace/Git_Job/Configuration_BackUp/"
+        sh "ls -l /var/lib/jenkins/workspace/Git_Job/Network_Backup_Pipeline/"
     }
 }
