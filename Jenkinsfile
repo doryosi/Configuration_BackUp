@@ -13,6 +13,6 @@ node{
         sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/Main.py"
     }
     stage("Verify"){
-        sh "ls -l /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
+        sh "ls -l /var/lib/jenkins/Switch_BackUp/"
     }
 }
