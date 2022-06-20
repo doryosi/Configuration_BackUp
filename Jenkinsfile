@@ -1,4 +1,4 @@
-properties([pipelineTriggers([pollSCM('0 2 * * *')])])
+properties([pipelineTriggers([cron('0 2 * * *')])])
 node{
     stage("Clean Up"){
         deleteDir()
