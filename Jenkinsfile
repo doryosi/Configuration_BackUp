@@ -16,8 +16,8 @@ node{
         sh "ls -l /var/lib/jenkins/Switch_BackUp/"
     }
     stage("Notification"){
-                 mail(body: 'This is a Test Jenkins', 
-                     subject: 'Test Jenkins',
+                 mail(body: 'The Network Backup has been executed successfully', 
+                     subject: 'Network Backup Job',
                      to: 'dorsinai1004@gmail.com')
     }
 }
