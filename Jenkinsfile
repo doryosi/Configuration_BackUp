@@ -17,7 +17,11 @@ node{
     }
     post {
         failure {
-            mail(body: 'This is a Test Jenkins', subject: 'Test Jenkins', to: 'dorsinai1004@gmail.com')
+            emailext (
+                mail(body: 'This is a Test Jenkins', 
+                     subject: 'Test Jenkins',
+                     to: 'dorsinai1004@gmail.com')
+            )
         }
     }
 }
