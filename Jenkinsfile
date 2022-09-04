@@ -15,4 +15,7 @@ node{
     stage("Verify"){
         sh "ls -l /var/lib/jenkins/Switch_BackUp/"
     }
+    stage("Notification"){
+        mail(body: 'This is a Test Jenkins', subject: 'Test Jenkins', to: 'dorsinai1004@gmail.com')
+    }
 }
