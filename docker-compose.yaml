@@ -1,0 +1,6 @@
+version: "3"
+services:
+  python:
+    build: .
+    volumes:
+      - /var/lib/docker/volumes/conf_bak:/var/lib/jenkins/Switch_BackUp/
