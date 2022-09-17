@@ -14,7 +14,7 @@ pipeline{
     }
     stage("build docker image"){
       steps{
-        sh "docker build config-backup ."
+        sh "docker build --tag config-backup ."
       }
     }
     stage("execute"){
