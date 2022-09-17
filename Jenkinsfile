@@ -36,7 +36,7 @@ pipeline{
   }
 post{
   always{
-                  mail(body: 'The Network Backup has been executed successfully',
+                mail(body: 'The Network Backup has been executed successfully',
                      subject: 'Network Backup Job',
                      to: 'dorsinai1004@gmail.com')
   }
