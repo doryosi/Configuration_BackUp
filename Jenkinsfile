@@ -1,24 +1,37 @@
 properties([pipelineTriggers([cron('0 2 * * *')])])
-node{
+pipeline{
+    agent any
+    stages{
     stage("Clean Up"){
+      steps{
         deleteDir()
+      }
     }
     stage("Clone Repo"){
-        git "https://github.com/doryosi/Configuration_BackUp.git"
+      steps{
+        git clone https://github.com/doryosi/Configuration_BackUp.git
+      }
     }
-    stage("Copy DB"){
-        sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
+    stage("build docker image"){
+      steps{
+        sh "docker build config-backup ."
+      }
     }
     stage("execute"){
-        sh "python3 /var/lib/jenkins/workspace/Network_Backup_Pipeline/Main.py"
+      steps{
+        sh "docker-compose up"
+      }
     }
     stage("Verify"){
+      steps{
         sh "ls -l /var/lib/jenkins/Switch_BackUp/"
+      }
     }
     stage("Notification"){
                  mail(body: 'The Network Backup has been executed successfully', 
                      subject: 'Network Backup Job',
                      to: 'dorsinai1004@gmail.com')
+        }
     }
 }
 
