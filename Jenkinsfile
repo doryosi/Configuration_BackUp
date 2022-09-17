@@ -41,8 +41,8 @@ pipeline{
     }
 }
 post{
-    success{    mail(body: 'The Network Backup has been executed successfully',
-                     subject: 'Network Backup Job',
+    success{    mail(body: "The Network Backup ${env.BUILD_URL} has been executed successfully",
+                     subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
                      to: 'dorsinai1004@gmail.com')
     }
     failure{
