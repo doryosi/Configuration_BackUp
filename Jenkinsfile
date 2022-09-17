@@ -27,11 +27,6 @@ pipeline{
         sh "docker-compose up"
       }
     }
-    stage("Verify"){
-      steps{
-        sh "ls -l /var/lib/docker/volumes/conf_bak/"
-      }
-    }
     stage("Notification"){
       steps{
                  mail(body: 'The Network Backup has been executed successfully', 
