@@ -14,11 +14,7 @@ pipeline{
     }
     stage("Copy DB"){
       steps{
-        sh '''
-           cp
-           /home/smb/PycharmProjects/Configuration_BackUp/devices_details
-           /var/lib/jenkins/workspace/Network_Backup_Pipeline/
-           '''
+        sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
       }
     }
     stage("build docker image"){
