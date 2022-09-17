@@ -9,7 +9,7 @@ pipeline{
     }
     stage("Clone Repo"){
       steps{
-        git clone https://github.com/doryosi/Configuration_BackUp.git
+        git "https://github.com/doryosi/Configuration_BackUp.git"
       }
     }
     stage("build docker image"){
