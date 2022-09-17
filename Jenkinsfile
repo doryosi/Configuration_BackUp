@@ -12,6 +12,15 @@ pipeline{
         git "https://github.com/doryosi/Configuration_BackUp.git"
       }
     }
+    stage("Copy DB"){
+      steps{
+        sh '''
+           cp
+           /home/smb/PycharmProjects/Configuration_BackUp/devices_details
+           /var/lib/jenkins/workspace/Network_Backup_Pipeline/
+           '''
+      }
+    }
     stage("build docker image"){
       steps{
         sh "docker build --tag config-backup ."
@@ -24,7 +33,7 @@ pipeline{
     }
     stage("Verify"){
       steps{
-        sh "ls -l /var/lib/jenkins/Switch_BackUp/"
+        sh "ls -l /var/lib/docker/volumes/conf_bak/"
       }
     }
     stage("Notification"){
