@@ -32,12 +32,24 @@ pipeline{
             sh "ls -l /var/lib/jenkins/Switch_BackUp"
         }
       }
+     stage("Send Email"){
+        steps{
+            node("master"){
+                echo "Send Email"
+            }
+        }
     }
-  }
+}
 post{
-  always{
-    sh "test"
-  }
+    success{    mail(body: 'The Network Backup has been executed successfully',
+                     subject: 'Network Backup Job',
+                     to: 'dorsinai1004@gmail.com')
+    }
+    failure{
+                mail(body: "Something is wrong with ${env.BUILD_URL}",
+                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                     to: 'dorsinai1004@gmail.com')
+    }
 }
 
 
