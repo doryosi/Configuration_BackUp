@@ -49,7 +49,8 @@ post{
                 mail(body: "Something is wrong with ${env.BUILD_URL}",
                      subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                      to: 'dorsinai1004@gmail.com')
+            }
+        }
     }
-}
 
 
