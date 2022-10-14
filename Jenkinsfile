@@ -6,7 +6,7 @@ pipeline{
     DB_PATH = "/home/smb/PycharmProjects/Configuration_BackUp/devices_details"
     GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
     IMAGE_NAME = "doryosisinay/config-backup:latest"
-    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Switch_BackUp/"
+    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Network_BackUp/"
     CONTAINER_NAME = "conf_backup_script"
     EMAIL = "dorsinai1004@gmail.com"
     }
@@ -61,6 +61,11 @@ pipeline{
     }
 }
 post{
+    always{
+        sh "docker rm $CONTAINER_NAME"
+        sh "docker image rm $IMAGE_NAME"
+        sh "docker logout"
+    }
     success{    mail(body: "The Network Backup ${env.BUILD_URL} has been executed successfully",
                      subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
                      to: "$EMAIL")
