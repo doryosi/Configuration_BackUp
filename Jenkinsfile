@@ -32,9 +32,9 @@ pipeline{
             sh "docker-compose build"
         }
     }
-//     stage("execute"){
-//         steps{
-//             sh "docker-compose up"
+    stage("execute"){
+        steps{
+            sh "docker-compose up"
         }
     }
      stage("Verify"){
@@ -61,11 +61,6 @@ pipeline{
     }
 }
 post{
-    always{
-        sh "docker rm $CONTAINER_NAME"
-        sh "docker image rm $IMAGE_NAME"
-        sh "docker logout"
-    }
     success{    mail(body: "The Network Backup ${env.BUILD_URL} has been executed successfully",
                      subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
                      to: "$EMAIL")
@@ -77,5 +72,5 @@ post{
             }
         }
     }
-}
+
 
