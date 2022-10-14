@@ -32,9 +32,9 @@ pipeline{
             sh "docker-compose build"
         }
     }
-    stage("execute"){
-        steps{
-            sh "docker-compose up"
+//     stage("execute"){
+//         steps{
+//             sh "docker-compose up"
         }
     }
      stage("Verify"){
