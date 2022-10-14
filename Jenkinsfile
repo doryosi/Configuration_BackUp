@@ -39,7 +39,7 @@ pipeline{
     }
      stage("Verify"){
         steps{
-            sh "$PATH_TO_SAVE_CONF_FILES"
+            sh "ls -l $PATH_TO_SAVE_CONF_FILES"
         }
      }
      stage('Login'){
