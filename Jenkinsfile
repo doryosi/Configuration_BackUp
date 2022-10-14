@@ -20,8 +20,8 @@ pipeline{
     }
     stage("Copy DB"){
         steps{
-            echo "$DB_PATH $WORKSPACE"
-            sh "cp $DB_PATH $WORKSPACE"
+            echo "$DB_PATH $WORKSPACE/"
+            sh "cp $DB_PATH $WORKSPACE/"
         }
     }
     stage("build docker image"){
