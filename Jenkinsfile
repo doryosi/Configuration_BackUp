@@ -6,7 +6,6 @@ pipeline{
     DB_PATH = "/home/smb/PycharmProjects/Configuration_BackUp/devices_details"
     GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
     IMAGE_NAME = "doryosisinay/config-backup:latest"
-    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Network_BackUp/"
     CONTAINER_NAME = "conf_backup_script"
     EMAIL = "dorsinai1004@gmail.com"
     }
@@ -37,11 +36,6 @@ pipeline{
 //             sh "docker-compose up"
 //         }
 //     }
-     stage("Verify"){
-        steps{
-            sh "ls -l $PATH_TO_SAVE_CONF_FILES"
-        }
-     }
      stage('Login'){
          steps{
             sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
