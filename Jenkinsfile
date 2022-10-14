@@ -1,6 +1,10 @@
 properties([pipelineTriggers([cron('0 2 * * *')])])
 pipeline{
     agent any
+    environment{
+    DB_PATH = "home/smb/PycharmProjects/Configuration_BackUp/devices_details"
+    GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
+    }
     stages{
     stage("Clean Up"){
         steps{
@@ -9,12 +13,13 @@ pipeline{
     }
     stage("Clone Repo"){
         steps{
-            git "https://github.com/doryosi/Configuration_BackUp.git"
+            git "$GIT_REPO"
         }
     }
     stage("Copy DB"){
         steps{
-            sh "cp /home/smb/PycharmProjects/Configuration_BackUp/devices_details /var/lib/jenkins/workspace/Network_Backup_Pipeline/"
+            echo "$DB_PATH $WORKSPACE $JOB_NAME"
+            sh "$DB_PATH $WORKSPACE/$JOB_NAME"
         }
     }
     stage("build docker image"){
