@@ -2,10 +2,13 @@ properties([pipelineTriggers([cron('0 2 * * *')])])
 pipeline{
     agent any
     environment{
+    DOCKERHUB_CREDENTIALS = credentials('doryosisinay-dockerhub')
     DB_PATH = "/home/smb/PycharmProjects/Configuration_BackUp/devices_details"
     GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
     IMAGE_NAME = "doryosisinay/config-backup:latest"
-    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Switch_BackUp"
+    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Switch_BackUp/"
+    CONTAINER_NAME = "conf_backup_script"
+    EMAIL = "dorsinai1004@gmail.com"
     }
     stages{
     stage("Clean Up"){
@@ -26,7 +29,7 @@ pipeline{
     }
     stage("build docker image"){
         steps{
-            sh "docker build --tag $IMAGE_NAME ."
+            sh "docker-compose build"
         }
     }
     stage("execute"){
@@ -38,7 +41,17 @@ pipeline{
         steps{
             sh "$PATH_TO_SAVE_CONF_FILES"
         }
-      }
+     }
+     stage('Login'){
+         steps{
+            sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+         }
+     }
+     stage('Push'){
+         steps{
+             sh "docker-compose push"
+         }
+     }
      stage("Send Email"){
         steps{
             node("master"){
@@ -50,12 +63,12 @@ pipeline{
 post{
     success{    mail(body: "The Network Backup ${env.BUILD_URL} has been executed successfully",
                      subject: "Succeeded Pipeline: ${currentBuild.fullDisplayName}",
-                     to: 'dorsinai1004@gmail.com')
+                     to: "$EMAIL")
     }
     failure{
                 mail(body: "Something is wrong with ${env.BUILD_URL}",
                      subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                     to: 'dorsinai1004@gmail.com')
+                     to: "$EMAIL")
             }
         }
     }
