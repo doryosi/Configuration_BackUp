@@ -2,7 +2,7 @@ properties([pipelineTriggers([cron('0 2 * * *')])])
 pipeline{
     agent any
     environment{
-    DB_PATH = "home/smb/PycharmProjects/Configuration_BackUp/devices_details"
+    DB_PATH = "/home/smb/PycharmProjects/Configuration_BackUp/devices_details"
     GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
     IMAGE_NAME = "doryosisinay/config-backup:latest"
     PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Switch_BackUp"
@@ -20,8 +20,8 @@ pipeline{
     }
     stage("Copy DB"){
         steps{
-            echo "$DB_PATH $WORKSPACE/"
-            sh "cp $DB_PATH $WORKSPACE/"
+            echo "$DB_PATH $WORKSPACE"
+            sh "cp $DB_PATH $WORKSPACE"
         }
     }
     stage("build docker image"){
