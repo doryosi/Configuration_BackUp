@@ -4,6 +4,8 @@ pipeline{
     environment{
     DB_PATH = "home/smb/PycharmProjects/Configuration_BackUp/devices_details"
     GIT_REPO = "https://github.com/doryosi/Configuration_BackUp.git"
+    IMAGE_NAME = "doryosisinay/config-backup:latest"
+    PATH_TO_SAVE_CONF_FILES = "/var/lib/jenkins/Switch_BackUp"
     }
     stages{
     stage("Clean Up"){
@@ -18,13 +20,13 @@ pipeline{
     }
     stage("Copy DB"){
         steps{
-            echo "$DB_PATH $WORKSPACE $JOB_NAME"
-            sh "$DB_PATH $WORKSPACE/$JOB_NAME"
+            echo "$DB_PATH $WORKSPACE"
+            sh "cp $DB_PATH $WORKSPACE"
         }
     }
     stage("build docker image"){
         steps{
-            sh "docker build --tag config-backup ."
+            sh "docker build --tag $IMAGE_NAME ."
         }
     }
     stage("execute"){
@@ -34,7 +36,7 @@ pipeline{
     }
      stage("Verify"){
         steps{
-            sh "ls -l /var/lib/jenkins/Switch_BackUp"
+            sh "$PATH_TO_SAVE_CONF_FILES"
         }
       }
      stage("Send Email"){
