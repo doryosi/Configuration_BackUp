@@ -46,13 +46,6 @@ pipeline{
              sh "docker-compose push"
          }
      }
-     stage("Send Email"){
-        steps{
-            node("master"){
-                echo "Send Email"
-            }
-        }
-    }
 }
 post{
     always{
