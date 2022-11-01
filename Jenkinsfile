@@ -31,11 +31,11 @@ pipeline{
             sh "docker-compose build"
         }
     }
-    stage("execute"){
-        steps{
-            sh "docker-compose up"
-        }
-    }
+//     stage("execute"){
+//         steps{
+//             sh "docker-compose up"
+//         }
+//     }
      stage('Login'){
          steps{
             sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
